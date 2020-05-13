@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import setAuthToken from '../authToken';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
+import axios from 'axios';
 class bookings extends Component {
   
     state={
@@ -44,7 +45,18 @@ class bookings extends Component {
 
     render() {
        
-
+      if(!this.props.location.state)
+      {
+          this.props.history.push('/login');
+          return(<h1>wtf</h1>)
+      }
+      else
+        {
+        if((this.props.location.state.token!==axios.defaults.headers.common["Authorization"]))
+        {localStorage.removeItem("jwtToken");
+          setAuthToken(false);
+          this.props.history.push('/login');
+        }
 
         let dArray= this.state.books.map(el=>{
             return( 
@@ -76,11 +88,18 @@ class bookings extends Component {
             </div>
             </nav>
            <h2 style={{color:'blue',alignItems:'center'}}>Here are your appointments :</h2>
-           <div className="row" style={{justifyContent:"center"}}>
-         <div className="col s4 offset-s4" >{dArray}</div>
+           <div width='auto'>
+           <div className="row" style={{position:'absolute', left:'-15%'}}>
+           <div className="col s4 offset-s4" >{dArray.splice(0,(dArray.length)/2)}</div>
+          </div>
+          <div className="row" style={{position:'absolute', left:'15%'}}>
+         <div className="col s4 offset-s4" >{dArray.splice((dArray.length)/2,dArray.length)}</div>
          </div>
+         </div>
+
           </div>
         )
+        }
     }
 }
 

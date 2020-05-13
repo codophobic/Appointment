@@ -54,7 +54,8 @@ bookingHandler=()=>{
     this.props.history.push({
         pathname:'/bookings',
         state:{
-            id:this.props.location.state.id
+            id:this.props.location.state.id,
+            token:this.props.location.state.token
         },
     })
 }
@@ -100,21 +101,29 @@ bookingHandler=()=>{
         return(
             <div>
               <nav>
-       <div class="nav-wrapper">
+               <div class="nav-wrapper">
         
-      <ul id="nav-mobile" class="left " style={{color:'black', fontSize:'20pc'}}>
-        <li><a onClick={this.bookingHandler}>MY BOOKINGS</a></li>
-        <li><a onClick={this.signOuthandler}>SIGN OUT</a></li>
+            <ul id="nav-mobile" class="left " style={{color:'black', fontSize:'20pc'}}>
+          <li><a onClick={this.bookingHandler}>MY BOOKINGS</a></li>
+           <li><a onClick={this.signOuthandler}>SIGN OUT</a></li>
         
-      </ul>
-    </div>
-  </nav>
+           </ul>
+             </div>
+           </nav>
         <h2 style={{color:'blue'}}>Welcome {this.props.location.state.name} to your profile</h2>
         <h4>here are the details of the doctor,u can schedule your booking</h4>
-          
-            <div className="row" style={{justifyContent:"center"}}>
-         <div className="col s4 offset-s4" >{dArray}</div>
+          <div width='auto'>
+            <div className="row" style={{position:'absolute', left:'-20%'}}>
+         <div className="col s4 offset-s4" >{dArray.slice(0,7)}</div>
          </div>
+         <div className="row" style={{position:'absolute', left:'5%'}}>
+         <div className="col s4 offset-s4" >{dArray.slice(7,14)}</div>
+         </div>
+         <div className="row" style={{position:'absolute', left:'30%'}}>
+         <div className="col s4 offset-s4" >{dArray.slice(14,20)}</div>
+         </div>
+         </div>
+
             </div>
         )
         }

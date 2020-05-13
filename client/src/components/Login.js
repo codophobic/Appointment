@@ -60,7 +60,7 @@ export default function SignInSide() {
       }
        
       document.getElementById("email").value = "";
-     document.getElementById("password").value = "";
+      document.getElementById("password").value = "";
       axios
     .post("/users/login", user)
     .then(res => {
@@ -81,6 +81,7 @@ export default function SignInSide() {
     .catch(err =>
         { console.log(err.response.data);
         setErrors(err.response.data);
+       
         }
       
     );
