@@ -120,7 +120,7 @@ bookingHandler=()=>{
          <div className="col s9 offset-s9" >{dArray.slice(7,14)}</div>
          </div>
          <div className="row" style={{flex:'1'}}>
-         <div className="col s9 offset-s9" >{dArray.slice(14,20)}</div>
+         <div className="col s9 offset-s9" >{dArray.slice(14)}</div>
          </div>
          </div>
 

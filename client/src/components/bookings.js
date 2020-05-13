@@ -5,7 +5,8 @@ import axios from 'axios';
 class bookings extends Component {
   
     state={
-        books:[]
+        books:[],
+        length:0
     }
     
     componentDidMount(){
@@ -19,10 +20,14 @@ class bookings extends Component {
             }
         }).then(r=>r.json()).then(res=>{
              //console.log(res + typeof(res));
-            
+             console.log(res);
+            let x= res.bookdata.length;
+            x=x/2;
+            console.log(x);
              this.setState({
                  ...this.state,
-                 books:res.bookdata
+                 books:res.bookdata,
+                 length:x
              })
              /*console.log(res);
              console.log(this.state.books);*/
@@ -75,6 +80,7 @@ class bookings extends Component {
            </div>
            )
             });
+            console.log(dArray.length);
         return(
           <div >
               <nav>
@@ -90,10 +96,10 @@ class bookings extends Component {
            <h2 style={{color:'blue',alignItems:'center'}}>Here are your appointments :</h2>
            <div style={{display:'flex',width:'70%'}} >
            <div className="row" style={{ flex:'1',}}>
-           <div className="col s7 offset-s7" >{dArray.splice(0,(dArray.length)/2)}</div>
+           <div className="col s7 offset-s7" >{dArray.slice(0,this.state.length)}</div>
           </div>
           <div className="row" style={{flex:'1'}}>
-         <div className="col s7 offset-s7" >{dArray.splice((dArray.length)/2,dArray.length)}</div>
+         <div className="col s7 offset-s7" >{dArray.slice(this.state.length)}</div>
          </div>
          </div>
 
