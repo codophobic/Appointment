@@ -76,7 +76,7 @@ class bookings extends Component {
            )
             });
         return(
-          <div>
+          <div >
               <nav>
                 <div class="nav-wrapper">
         
@@ -88,12 +88,12 @@ class bookings extends Component {
             </div>
             </nav>
            <h2 style={{color:'blue',alignItems:'center'}}>Here are your appointments :</h2>
-           <div width='auto'>
-           <div className="row" style={{position:'absolute', left:'-15%'}}>
-           <div className="col s4 offset-s4" >{dArray.splice(0,(dArray.length)/2)}</div>
+           <div style={{display:'flex',width:'70%'}} >
+           <div className="row" style={{ flex:'1',}}>
+           <div className="col s7 offset-s7" >{dArray.splice(0,(dArray.length)/2)}</div>
           </div>
-          <div className="row" style={{position:'absolute', left:'15%'}}>
-         <div className="col s4 offset-s4" >{dArray.splice((dArray.length)/2,dArray.length)}</div>
+          <div className="row" style={{flex:'1'}}>
+         <div className="col s7 offset-s7" >{dArray.splice((dArray.length)/2,dArray.length)}</div>
          </div>
          </div>
 

@@ -112,15 +112,15 @@ bookingHandler=()=>{
            </nav>
         <h2 style={{color:'blue'}}>Welcome {this.props.location.state.name} to your profile</h2>
         <h4>here are the details of the doctor,u can schedule your booking</h4>
-          <div width='auto'>
-            <div className="row" style={{position:'absolute', left:'-20%'}}>
-         <div className="col s4 offset-s4" >{dArray.slice(0,7)}</div>
+          <div style={{width:'70%',display:'flex'}}>
+            <div className="row" style={{flex:'1'}}>
+         <div className="col s9 offset-s9" >{dArray.slice(0,7)}</div>
          </div>
-         <div className="row" style={{position:'absolute', left:'5%'}}>
-         <div className="col s4 offset-s4" >{dArray.slice(7,14)}</div>
+         <div className="row" style={{flex:'1'}}>
+         <div className="col s9 offset-s9" >{dArray.slice(7,14)}</div>
          </div>
-         <div className="row" style={{position:'absolute', left:'30%'}}>
-         <div className="col s4 offset-s4" >{dArray.slice(14,20)}</div>
+         <div className="row" style={{flex:'1'}}>
+         <div className="col s9 offset-s9" >{dArray.slice(14,20)}</div>
          </div>
          </div>
 
