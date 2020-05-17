@@ -155,7 +155,29 @@ else
     });
     
 });
+router.post('/delete',async (req,res)=>{
+    await Usermodel.findOne({_id:req.body.userId}).then(doc=>{
+        let dArray= doc.bookdata;
+        for(let i=0;i<dArray.length;i++)
+        {
+            if(dArray[i].id===req.body.id)
+            {
+                dArray.splice(i,1);
+                console.log('done');
+                break;
+            }
+        }
 
+        doc.bookdata=dArray;
+         doc.save().then(g=>console.log(g)).catch(err=>console.log(err));
+         console.log(doc.bookdata+"afbjfbjf");
+        res.status(200).json({
+            message:"Your appointment is cancelled",
+            
+        })
+
+    })
+})
 
 router.get('/data',(req,res)=>{
     Docmodel.find({},(err,result)=>{

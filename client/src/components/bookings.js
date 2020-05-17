@@ -6,9 +6,41 @@ class bookings extends Component {
   
     state={
         books:[],
-        length:0
+        length:0,
+        v:1
     }
     
+    componentDidUpdate(prevpops,prevstate){
+     if(this.state.v!==prevstate.v)
+     {
+      let uid= this.props.location.state.id;
+      //console.log(uid);
+      //console.log(sendData);
+      fetch('/users/bookdata/'+uid,{
+          method:"GET",
+          headers:{
+             "Content-Type":"application/json"
+          }
+      }).then(r=>r.json()).then(res=>{
+           //console.log(res + typeof(res));
+           console.log(res);
+          let x= res.bookdata.length;
+          x=x+1/2;
+          console.log(x);
+           this.setState({
+               ...this.state,
+               books:res.bookdata,
+               length:x
+           })
+           /*console.log(res);
+           console.log(this.state.books);*/
+
+
+      }).catch(err=>{
+           console.log(err);
+      })
+     }
+    }
     componentDidMount(){
         let uid= this.props.location.state.id;
         //console.log(uid);
@@ -22,7 +54,7 @@ class bookings extends Component {
              //console.log(res + typeof(res));
              console.log(res);
             let x= res.bookdata.length;
-            x=x/2;
+            x=x+1/2;
             console.log(x);
              this.setState({
                  ...this.state,
@@ -47,6 +79,29 @@ class bookings extends Component {
         this.props.location.state.id='';
         this.props.history.push('/login');
       };
+
+      onClickhandler=(el)=>{
+        const sendElement={
+          id:el,
+          userId:this.props.location.state.id
+        }
+       axios.post('/users/delete',sendElement).then(res=>{
+         alert(res.data.message);
+        this.setState({
+          ...this.state,
+          v:this.state.v==1?0:1
+        })
+       }).catch(err=>{
+         console.log(err);
+       });
+      }
+
+      goprofileHandler=()=>{
+        this.props.history.push({
+          pathname:'/profile',
+          state:this.props.location.state.fulldata
+      })
+      }
 
     render() {
        
@@ -74,6 +129,9 @@ class bookings extends Component {
                        Please visit the doctor on this date and time {el.time}.
                       You can contact him with this number {el.phone}</p>
                  </div>
+                 <div className="card-action">
+                  <button className="btn waves-effect"  onClick={()=>this.onClickhandler(el.id)}>CANCEL</button>
+                </div>
                 
                </div>
              </div>
@@ -87,7 +145,7 @@ class bookings extends Component {
                 <div class="nav-wrapper">
         
                 <ul id="nav-mobile" class="left ">
-         
+                <li><a onClick={this.goprofileHandler} style={{fontSize:'20px'}}>PROFILE</a></li>
                <li><a onClick={this.signOuthandler} style={{fontSize:'20px'}}>SIGN OUT</a></li>
           
               </ul>
@@ -96,10 +154,10 @@ class bookings extends Component {
            <h2 style={{color:'blue',alignItems:'center'}}>Here are your appointments :</h2>
            <div style={{display:'flex',width:'70%'}} >
            <div className="row" style={{ flex:'1',}}>
-           <div className="col s7 offset-s7" >{dArray.slice(0,this.state.length)}</div>
+           <div className="col s7 offset-s7" >{dArray.slice(0,(this.state.books.length+1)/2)}</div>
           </div>
           <div className="row" style={{flex:'1'}}>
-         <div className="col s7 offset-s7" >{dArray.slice(this.state.length)}</div>
+         <div className="col s7 offset-s7" >{dArray.slice((this.state.books.length+1)/2)}</div>
          </div>
          </div>
 

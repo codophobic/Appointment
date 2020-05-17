@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import setAuthToken from '../authToken';
 import {withRouter} from 'react-router-dom'
 import axios from 'axios';
+import Particles from 'react-particles-js';
+import classes from './particle.module.css';
 class profile extends Component{
     
     componentDidMount(){
@@ -55,7 +57,8 @@ bookingHandler=()=>{
         pathname:'/bookings',
         state:{
             id:this.props.location.state.id,
-            token:this.props.location.state.token
+            token:this.props.location.state.token,
+            fulldata:this.props.location.state
         },
     })
 }
@@ -104,14 +107,18 @@ bookingHandler=()=>{
                <div class="nav-wrapper">
         
             <ul id="nav-mobile" class="left " style={{color:'black', fontSize:'20pc'}}>
-          <li><a onClick={this.bookingHandler}>MY BOOKINGS</a></li>
-           <li><a onClick={this.signOuthandler}>SIGN OUT</a></li>
+          <li><a onClick={this.bookingHandler} style={{    fontsize: '20px',
+    border: '0.9px solid pink'}}>MY BOOKINGS</a></li>
+           <li><a onClick={this.signOuthandler}  style={{    fontsize: '20px',
+    border: '0.9px solid pink'}}>SIGN OUT</a></li>
         
            </ul>
              </div>
            </nav>
-        <h2 style={{color:'blue'}}>Welcome {this.props.location.state.name} to your profile</h2>
-        <h4>here are the details of the doctor,u can schedule your booking</h4>
+
+          
+        <h2 style={{color:'blue',textAlign:'center',border:'1px solid black',color:'black'}}>Welcome { this.props.location.state.name} to your profile</h2>
+        <h4 style={{textAlign:'center'}}>Here are the details of the doctor,you can schedule your booking</h4>
           <div style={{width:'70%',display:'flex'}}>
             <div className="row" style={{flex:'1'}}>
          <div className="col s9 offset-s9" >{dArray.slice(0,7)}</div>
