@@ -7,7 +7,6 @@ const compression= require('compression');
 
 const users= require('./routes/api/users');
 const admin= require('./routes/api/adminRoute');
-const doctorModel = require('./models/doctor');
 const app =express();
 
 app.use(bodyParser.urlencoded({extended:false}));
