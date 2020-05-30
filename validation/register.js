@@ -25,9 +25,9 @@ let errors={};
     {
         errors.password= "Password field is required";
     }
-    if(!Validator.isLength(data.password,{min:6,max:25}))
+    if(!Validator.isLength(data.password,{min:6,max:24}))
     {
-        errors.password="Password must be atleast 6 characters and atmost 25 characters";
+        errors.password="Password must be atleast 6 characters and atmost 24 characters";
     }
 
     return{

@@ -14,7 +14,7 @@ const userSchema = new schema({
         type:String,
         required:true
     },
-    bookdata:[]
+    bookdata:[],
 });
 
 module.exports= User = mongoose.model("users",userSchema);
